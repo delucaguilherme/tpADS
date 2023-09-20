@@ -1,7 +1,7 @@
 from tkinter import *
-from .userType import *
+from .HomeScreen import *
 
-class Application:
+class Starter:
     def __init__(self):
         root = Tk()
         root.title('GlicMed')
@@ -11,6 +11,6 @@ class Application:
 
         #print(font.nametofont("TkDefaultFont").actual())
 
-        UserType(root)
+        HomeScreen(root)
 
         root.mainloop()

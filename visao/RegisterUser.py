@@ -1,7 +1,7 @@
 from tkinter import *
 from visao.PlaceholderEntry import PlaceholderEntry
 
-class UserMenu():
+class RegisterUser:
     def __init__(self, parent=None):
         frame = Frame(parent, width=400, height=400, bg='white')
         frame.place(x=200, y=100)
@@ -21,8 +21,8 @@ class UserMenu():
         password_confirm = PlaceholderEntry(frame, password=1, fg='black', border=1, placeholder="Confirmar Senha") 
         password_confirm.place(x=50, y=200, width=300, height=30)
 
-        cmmnUserBttn = Button(frame, text='Entrar', bg='#57a1f8', fg='white', border=0, font=('Segoe UI', 14, 'bold'), command=lambda: [frame.destroy(), self.userSignin(parent)])
+        cmmnUserBttn = Button(frame, text='Entrar', bg='#57a1f8', fg='white', border=0, font=('Segoe UI', 14, 'bold'), command=lambda: [frame.destroy(), self.userSignup(parent)])
         cmmnUserBttn.place(x = 50, y=280, width=300, height=60)
 
-    def userSignin(self, parent):
+    def userSignup(self, parent):
         print("done")

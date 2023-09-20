@@ -1,3 +1,3 @@
-from visao.application import *
+from visao.Starter import *
 
-Application()
+Starter()
