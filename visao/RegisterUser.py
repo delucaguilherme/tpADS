@@ -1,36 +1,35 @@
 from tkinter import *
 from visao.PlaceholderEntry import PlaceholderEntry
 from .User import Usuarios
-from .HomeScreen import *
 
 class RegisterUser:
-    def __init__(self, parent=None):
-        self.parent = parent
+    def __init__(self):
+        root = Tk()
+        root.title('GlicMed')
+        root.geometry('800x600')
+        root.configure(bg="#fff")
+        root.resizable(False, False)
 
-        self.frame = Frame(parent, width=400, height=400, bg='white')
-        self.frame.place(x=200, y=100)
+        heading = Label(root, text='Preencha as informações', fg='#57a1f8', bg='white', font=('Segoe UI', 16, 'bold'))
+        heading.place(x=250, y=10)
 
-        heading = Label(self.frame, text='Preencha as informações', fg='#57a1f8', bg='white', font=('Segoe UI', 16, 'bold'))
-        heading.place(x=50, y=10)
+        self.name = PlaceholderEntry(root, fg='black', border=1, placeholder="Nome Completo")
+        self.name.place(x=250, y=50, width=300, height=30)
 
-        self.name = PlaceholderEntry(self.frame, fg='black', border=1, placeholder="Nome Completo")
-        self.name.place(x=50, y=50, width=300, height=30)
+        self.email = PlaceholderEntry(root, fg='black', border=1, placeholder="Email")
+        self.email.place(x=250, y=100, width=300, height=30)
 
-        self.email = PlaceholderEntry(self.frame, fg='black', border=1, placeholder="Email")
-        self.email.place(x=50, y=100, width=300, height=30)
+        self.usuario = PlaceholderEntry(root, fg='black', border=1, placeholder="Nome de Usuário")  # Corrigi o texto do placeholder
+        self.usuario.place(x=250, y=150, width=300, height=30)
 
-        self.usuario = PlaceholderEntry(self.frame, fg='black', border=1, placeholder="Nome de Usuário")  # Corrigi o texto do placeholder
-        self.usuario.place(x=50, y=150, width=300, height=30)
+        self.password = PlaceholderEntry(root, password=1, fg='black', border=1, placeholder="Senha")
+        self.password.place(x=250, y=200, width=300, height=30)
 
-        self.password = PlaceholderEntry(self.frame, password=1, fg='black', border=1, placeholder="Senha")
-        self.password.place(x=50, y=200, width=300, height=30)
+        self.password_confirm = PlaceholderEntry(root, password=1, fg='black', border=1, placeholder="Confirmar Senha")
+        self.password_confirm.place(x=250, y=250, width=300, height=30)
 
-        # Adicionei um campo para confirmar a senha
-        self.password_confirm = PlaceholderEntry(self.frame, password=1, fg='black', border=1, placeholder="Confirmar Senha")
-        self.password_confirm.place(x=50, y=250, width=300, height=30)
-
-        cmmnUserBttn = Button(self.frame, text='Cadastrar', bg='#57a1f8', fg='white', border=0, font=('Segoe UI', 14, 'bold'), command=self.userSignup)  # Mudei o texto do botão para "Cadastrar"
-        cmmnUserBttn.place(x=50, y=320, width=300, height=60)  # Ajustei a posição vertical do botão
+        cmmnUserBttn = Button(root, text='Cadastrar', bg='#57a1f8', fg='white', border=0, font=('Segoe UI', 14, 'bold'), command=lambda :[self.userSignup(), root.destroy()])
+        cmmnUserBttn.place(x=250, y=320, width=300, height=60)
 
     def userSignup(self):
         name = self.name.get()
@@ -48,10 +47,7 @@ class RegisterUser:
             
             if resultado == "Usuário cadastrado com sucesso!":
                 print("Usuário cadastrado com sucesso!")
-                # self.frame.destroy()
-                # HomeScreen(self.parent)
             else:
                 print("Erro ao cadastrar usuário:", resultado)
         else:
-            print("As senhas não coincidem.")
-
+            print("As senhas não coincidem.")        

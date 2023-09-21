@@ -1,5 +1,4 @@
 from visao.Starter import *
 # import persistencia
 
-
-Starter() #GUI
+HomeScreen()
