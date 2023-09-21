@@ -21,8 +21,9 @@ class RegisterUser:
         password_confirm = PlaceholderEntry(frame, password=1, fg='black', border=1, placeholder="Confirmar Senha") 
         password_confirm.place(x=50, y=200, width=300, height=30)
 
-        cmmnUserBttn = Button(frame, text='Entrar', bg='#57a1f8', fg='white', border=0, font=('Segoe UI', 14, 'bold'), command=lambda: [frame.destroy(), self.userSignup(parent)])
+        cmmnUserBttn = Button(frame, text='Entrar', bg='#57a1f8', fg='white', border=0, font=('Segoe UI', 14, 'bold'), command=lambda: [self.userSignup(parent, name.get(), email.get(), password.get(), password_confirm.get()), frame.destroy()])
         cmmnUserBttn.place(x = 50, y=280, width=300, height=60)
 
-    def userSignup(self, parent):
+    def userSignup(self, parent, name, email, password, password_confirm):
+        print(f"{name}, {email}, {password}, {password_confirm}")
         print("done")

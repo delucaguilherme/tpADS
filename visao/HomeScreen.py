@@ -5,7 +5,7 @@ import os
 
 class HomeScreen:
     def __init__(self, parent):
-        frame = Frame(parent, width=800, height=400, bg='white')
+        frame = Frame(parent, width=400, height=400, bg='red')
         frame.place(x=200, y=100)
 
         self.icon_glicmed = PhotoImage(file=os.path.join(os.path.dirname(__file__), '../icons/GlicMed_icon.png'))
