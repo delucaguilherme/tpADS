@@ -1,53 +1,62 @@
-from tkinter import *
-from visao.PlaceholderEntry import PlaceholderEntry
+from tkinter import Tk, Entry, Label, Button, StringVar
+import customtkinter as ctk
 from .User import Usuarios
 
 class RegisterUser:
     def __init__(self):
-        root = Tk()
-        root.title('GlicMed')
-        root.geometry('800x600')
-        root.configure(bg="#fff")
-        root.resizable(False, False)
+        
+        self.root = Tk()
+        self.root.title('GlicMed')
+        self.root.geometry('800x600')
+        self.root.configure(bg="#fff")
+        self.root.resizable(False, False)
+        
+        heading = ctk.CTkLabel(self.root, text='Preencha as informações', text_color='#57a1f8', font=('Segoe UI', 26, 'bold'))
+        heading.place(relx=0.5, rely=0.1, anchor=ctk.CENTER)
 
-        heading = Label(root, text='Preencha as informações', fg='#57a1f8', bg='white', font=('Segoe UI', 16, 'bold'))
-        heading.place(x=250, y=10)
+        self.email = ctk.CTkEntry(self.root, placeholder_text="Email")
+        self.email.place(relx=0.5, rely=0.2, anchor=ctk.CENTER)
 
-        self.name = PlaceholderEntry(root, fg='black', border=1, placeholder="Nome Completo")
-        self.name.place(x=250, y=50, width=300, height=30)
+        self.password = ctk.CTkEntry(self.root, show="*", placeholder_text="Senha")
+        self.password.place(relx=0.5, rely=0.3, anchor=ctk.CENTER)
 
-        self.email = PlaceholderEntry(root, fg='black', border=1, placeholder="Email")
-        self.email.place(x=250, y=100, width=300, height=30)
+        self.password_confirm = ctk.CTkEntry(self.root, show="*", placeholder_text="Confirmar Senha")
+        self.password_confirm.place(relx=0.5, rely=0.4, anchor=ctk.CENTER)
 
-        self.usuario = PlaceholderEntry(root, fg='black', border=1, placeholder="Nome de Usuário")  # Corrigi o texto do placeholder
-        self.usuario.place(x=250, y=150, width=300, height=30)
-
-        self.password = PlaceholderEntry(root, password=1, fg='black', border=1, placeholder="Senha")
-        self.password.place(x=250, y=200, width=300, height=30)
-
-        self.password_confirm = PlaceholderEntry(root, password=1, fg='black', border=1, placeholder="Confirmar Senha")
-        self.password_confirm.place(x=250, y=250, width=300, height=30)
-
-        cmmnUserBttn = Button(root, text='Cadastrar', bg='#57a1f8', fg='white', border=0, font=('Segoe UI', 14, 'bold'), command=lambda :[self.userSignup(), root.destroy()])
-        cmmnUserBttn.place(x=250, y=320, width=300, height=60)
+        loginBttn = ctk.CTkButton(self.root,
+                                  text='Cadastrar Usuário',
+                                  font=('Segoe UI', 16),
+                                  width=210, height=60,
+                                  command=lambda: [self.userSignup()])
+        loginBttn.place(relx=0.5, rely=0.6, anchor=ctk.CENTER)
+        
+        returnBttn = ctk.CTkButton(self.root,
+                                   text='Voltar para Login',
+                                   font=('Segoe UI', 12),
+                                   width=100, height=40,
+                                   command=self.root.destroy)
+        returnBttn.place(relx=0.2, rely=0.9, anchor=ctk.CENTER)
 
     def userSignup(self):
-        name = self.name.get()
-        email = self.email.get()
-        usuario = self.usuario.get()  # Usei a variável 'usuario' para obter o nome de usuário
+        email = self.email.get() 
         password = self.password.get()
         password_confirm = self.password_confirm.get()
 
         if password == password_confirm:
-            # Crie uma instância de Usuarios com as informações inseridas pelo usuário
-            novo_usuario = Usuarios(nome=name, email=email, usuario=usuario, senha=password)  # Corrigi o uso de 'usuario'
-
-            # Insira o novo usuário no banco de dados
+            novo_usuario = Usuarios(email=email, senha=password)  
             resultado = novo_usuario.insertUser()
             
             if resultado == "Usuário cadastrado com sucesso!":
+                sucess = ctk.CTkLabel(self.root, text='Usuário cadastrado com sucesso!', text_color='green', font=('Segoe UI', 16, 'bold'))
+                sucess.place(relx=0.5, rely=0.52, anchor=ctk.CENTER)
                 print("Usuário cadastrado com sucesso!")
             else:
-                print("Erro ao cadastrar usuário:", resultado)
+                error = ctk.CTkLabel(self.root, text= f'Erro ao cadastrar usuário:\n{resultado}', text_color='red', font=('Segoe UI', 16, 'bold'))
+                error.place(relx=0.5, rely=0.5, anchor=ctk.CENTER)
         else:
-            print("As senhas não coincidem.")        
+            wrong = ctk.CTkLabel(self.root, text= f'As senhas não coincidem.', text_color='red', font=('Segoe UI', 16, 'bold'))
+            wrong.place(relx=0.5, rely=0.52, anchor=ctk.CENTER)
+
+class UserSignin:
+    def __init__(self, root):
+        self.root = root

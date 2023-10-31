@@ -9,8 +9,6 @@ class Starter:
         root.configure(bg="#fff")
         root.resizable(False, False)
 
-        #print(font.nametofont("TkDefaultFont").actual())
-
         HomeScreen(root)
 
         root.mainloop()
