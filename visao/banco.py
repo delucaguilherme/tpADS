@@ -11,12 +11,14 @@ class Banco():
         c = self.conexao.cursor()
 
         c.execute("""create table if not exists usuarios (
-                    idusuario integer primary key autoincrement ,
-                    nome text,
-                    endereco text,
-                    email text,
-                    usuario text,
-                    senha text)""")
+                    email primary key,
+                    senha text,
+                    tipo integer)""")
         
         self.conexao.commit()
         c.close()
+
+#Para iniciar uma nova instância do banco, é necessário excluir o atual, descomentar a linha abaixo e rodar apenas este arquivo
+
+"""if __name__ == "__main__":
+   Banco()"""

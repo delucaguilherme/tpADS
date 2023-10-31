@@ -2,19 +2,17 @@ from .banco import Banco
 
 class Usuarios(object):
 
-    def __init__(self, idusuario=0, nome="", email="", usuario="", senha=""):
+    def __init__(self, email="", senha="", tipo=0):
         self.info = {}
-        self.idusuario = idusuario
-        self.nome = nome
         self.email = email
-        self.usuario = usuario
         self.senha = senha
+        self.tipo = tipo
 
     def insertUser(self):
         banco = Banco()
         try:
             c = banco.conexao.cursor()
-            c.execute("insert into usuarios (nome, email, usuario, senha) values ('" + self.nome + "', '" + self.email + "', '" + self.usuario + "', '" + self.senha + "')")
+            c.execute("insert into usuarios (email, senha, tipo) values ('" + self.email + "', '" + self.senha + "', '" + str(self.tipo) + "')")
             banco.conexao.commit()
             c.close()
             return "Usuário cadastrado com sucesso!"
@@ -25,7 +23,7 @@ class Usuarios(object):
         banco = Banco()
         try:
             c = banco.conexao.cursor()
-            c.execute("update usuarios set nome = '" + self.nome + "', email = '" + self.email + "', usuario = '" + self.usuario + "', senha = '" + self.senha + "' where idusuario = " + str(self.idusuario))
+            c.execute("update usuarios set email = '" + self.email + "', '" + self.senha + "', '" + self.tipo + "' where email = " + str(self.email))
             banco.conexao.commit()
             c.close()
             return "Usuário atualizado com sucesso!"
@@ -36,24 +34,22 @@ class Usuarios(object):
         banco = Banco()
         try:
             c = banco.conexao.cursor()
-            c.execute("delete from usuarios where idusuario = " + str(self.idusuario))
+            c.execute("delete from usuarios where email = " + str(self.email))
             banco.conexao.commit()
             c.close()
             return "Usuário excluído com sucesso!"
         except Exception as e:
             return "Ocorreu um erro na exclusão do usuário: " + str(e)
 
-    def selectUser(self, idusuario):
+    def selectUser(self, email):
         banco = Banco()
         try:
             c = banco.conexao.cursor()
-            c.execute("select * from usuarios where idusuario = " + str(idusuario))
+            c.execute("select * from usuarios where email = " + str(self.email))
             for linha in c:
-                self.idusuario = linha[0]
-                self.nome = linha[1]
-                self.email = linha[2]
-                self.usuario = linha[3]
-                self.senha = linha[4]
+                self.email = linha[1]
+                self.senha = linha[2]
+                self.tipo = linha[3]
             c.close()
             return "Busca feita com sucesso!"
         except Exception as e:
