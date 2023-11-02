@@ -41,16 +41,20 @@ class Usuarios(object):
         except Exception as e:
             return "Ocorreu um erro na exclusão do usuário: " + str(e)
 
-    def selectUser(self, email):
+    def selectUser(self, email, password):
         banco = Banco()
         try:
             c = banco.conexao.cursor()
-            c.execute("select * from usuarios where email = " + str(self.email))
-            for linha in c:
-                self.email = linha[1]
-                self.senha = linha[2]
-                self.tipo = linha[3]
-            c.close()
-            return "Busca feita com sucesso!"
+            c.execute("SELECT * FROM usuarios WHERE email = ? and senha = ?", (email,password))
+            result = c.fetchone()
+            if result:
+                self.email = result[0]
+                self.senha = result[1]
+                self.tipo = result[2]
+                c.close()
+                return self.tipo
+            else:
+                c.close()
+                return "Usuário ou senha incorretos."
         except Exception as e:
             return "Ocorreu um erro na busca do usuário: " + str(e)

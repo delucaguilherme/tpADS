@@ -16,7 +16,6 @@ class PlaceholderEntry(tk.Entry):
             if (self.password == 1):
                 self.config(show="*")
 
-
     def focusOut(self, _):
         if self.get() == "":
             self.insert(0, self.placeholder)

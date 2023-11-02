@@ -59,4 +59,6 @@ class RegisterUser:
 
 class UserSignin:
     def __init__(self, root):
-        self.root = root
+        
+        print(f"{self.email}, {self.password}")
+
