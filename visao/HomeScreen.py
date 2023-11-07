@@ -1,21 +1,18 @@
-import customtkinter as ctk
+import customtkinter
 from tkinter import *
 from .RegisterUser import *
 from .UserSignin import UserSignin
 from .AdmScreen import AdmScreen
 import os
-from PIL import Image
+
 
 ctk.set_appearance_mode("Light")  # Other: "Light", "System" (only macOS)
 
-
 class HomeScreen:
     def __init__(self, root=None):
-        self.root = root
-        self.root.title('GlicMed')
-        self.root.geometry('800x600')
-        self.root.configure(bg="#fff")
-        self.root.resizable(False, False)
+        self.root = customtkinter.CTk()
+
+        
 
         icon_glicmed = PhotoImage(file=os.path.join(
             os.path.dirname(__file__), '../icons/GlicMed_icon.png'))

@@ -1,9 +1,10 @@
 from tkinter import *
+import customtkinter as ctk
 from visao.PlaceholderEntry import PlaceholderEntry
 
 class UserSignin:
     def __init__(self):
-        root = Tk()
+        root = ctk.CTk()
         root.title('GlicMed')
         root.geometry('800x600')
         root.configure(bg="#fff")
