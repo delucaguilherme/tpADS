@@ -1,5 +1,6 @@
 from view.HomeScreen import HomeScreen
 #from view.RegisterUserScreen import RegisterUserScreen
+#from view.RegisterMealScreen import RegisterMealScreen
 
 home = HomeScreen()
 

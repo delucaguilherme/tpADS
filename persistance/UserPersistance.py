@@ -26,25 +26,6 @@ class UserPersistance:
             return "Usuário excluído com sucesso!"
         except Exception as e:
             return "Ocorreu um erro na exclusão do usuário: " + str(e)
-
-    @classmethod
-    def selectUser(self, email, password):
-        banco = Banco()
-        try:
-            c = banco.conexao.cursor()
-            c.execute("SELECT * FROM usuarios WHERE email = ? and senha = ?", (email,password))
-            result = c.fetchone()
-            if result:
-                self.email = result[0]
-                self.senha = result[1]
-                self.tipo = result[2]
-                c.close()
-                return self.tipo
-            else:
-                c.close()
-                return "Usuário ou senha incorretos."
-        except Exception as e:
-            return "Ocorreu um erro na busca do usuário: " + str(e)
         
     @classmethod
     def test(self, u:User):
