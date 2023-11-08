@@ -22,12 +22,12 @@ class RegisterMealScreen:
         )
         heading.place(relx=0.5, rely=0.20, anchor=CENTER)
 
-        self.sugar_level = CTkEntry(
+        self.carboidrates = CTkEntry(
             master=self.root, 
             placeholder_text="carboidratos (g)", 
             width=210, height=30
         )
-        self.sugar_level.place(relx=0.5, rely=0.34, anchor=CENTER)
+        self.carboidrates.place(relx=0.5, rely=0.34, anchor=CENTER)
 
         self.date = CTkEntry(
             master=self.root, 
@@ -51,14 +51,14 @@ class RegisterMealScreen:
         )
         self.meal_type.place(relx=0.5, rely=0.52, anchor=CENTER)
 
-        signup_bttn = CTkButton(
+        register_bttn = CTkButton(
             master=self.root, 
             text='Registrar Refeição',
             font=('Segoe UI', 16),
             width=210, height=30, 
-            command=lambda: [self.root.destroy()]
+            command=lambda: [self.get_items()]
         )
-        signup_bttn.place(relx=0.5, rely=0.67, anchor=CENTER)
+        register_bttn.place(relx=0.5, rely=0.67, anchor=CENTER)
         
         return_bttn = CTkButton(
             master=self.root,

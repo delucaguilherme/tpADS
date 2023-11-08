@@ -1,8 +1,8 @@
 class User:
-    def __init__(self, email="", senha="", tipo=0):
+    def __init__(self, email="", password="", type=0):
         self.email = email
-        self.senha = senha
-        self.tipo = tipo
+        self.password = password
+        self.type = type
 
     def __str__(self):
         return self.email + " " + self.senha + " " + str(self.tipo)

@@ -12,7 +12,22 @@ class Banco:
                     email primary key,
                     senha text,
                     tipo integer)""")
-        
+
+#        c.execute("""create table if not exists meal (
+#                  email primary key,
+#                  carboidrates text,
+#                  date text, 
+#                  type text,
+#                  meal text)""")
+
+#        c.execute("""create table if not exists glucose (
+#                  email primary key,
+#                  sugar_level text,
+#                  date text,
+#                  time text, 
+#                  meal_type text,
+#                  meal_time text)""")
+
         self.conexao.commit()
         c.close()
 

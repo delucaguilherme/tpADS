@@ -1,9 +1,9 @@
 class Meal:
-    def __init__(self, carboidratos, data, horario, refeicao):
-        self.carboidratos = carboidratos
-        self.data = data
-        self.horario = horario
-        self.refeicao = refeicao
+    def __init__(self, carboidrates, date, time, meal):
+        self.carboidrates = carboidrates
+        self.date = date
+        self.time = time
+        self.meal = meal
 
     def __str__(self):
-        return self.carboidratos+ " " + self.data + " " + self.horario + " " + self.refeicao
+        return self.carboidrates+ " " + self.date + " " + self.time + " " + self.meal

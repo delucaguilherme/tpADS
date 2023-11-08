@@ -1,7 +1,7 @@
 from customtkinter import *
 from tkcalendar import *
 from tktimepicker import *
-from control.RegisterUserController import RegisterUserController as Controller
+from control.RegisterGlucoseController import RegisterGlucoseController as Controller
 
 class RegisterGlucoseScreen:
     def __init__(self):
@@ -13,7 +13,7 @@ class RegisterGlucoseScreen:
         self.root.resizable(False, False)
         set_appearance_mode("light")
 
-        radio_var = StringVar(value="default")
+        self.radio_var = StringVar(value="default")
         
         heading = CTkLabel(
             master=self.root, 
@@ -54,7 +54,7 @@ class RegisterGlucoseScreen:
         self.meal_time_1 = CTkRadioButton(
             master=self.root, 
             text="Pré-Refeição", 
-            variable=radio_var, 
+            variable=self.radio_var, 
             value="pre"
         )
         self.meal_time_1.place(relx=0.4, rely=0.58, anchor=CENTER)
@@ -62,19 +62,19 @@ class RegisterGlucoseScreen:
         self.meal_time_2 = CTkRadioButton(
             master=self.root, 
             text="Pós-Refeição", 
-            variable=radio_var, 
+            variable=self.radio_var, 
             value="pos"
         )
         self.meal_time_2.place(relx=0.6, rely=0.58, anchor=CENTER)
 
-        signup_bttn = CTkButton(
+        register_bttn = CTkButton(
             master=self.root, 
             text='Registrar',
             font=('Segoe UI', 16),
             width=210, height=30, 
-            command=lambda: [self.root.destroy()]
+            command=lambda: [self.register_bttn_action()]
         )
-        signup_bttn.place(relx=0.5, rely=0.67, anchor=CENTER)
+        register_bttn.place(relx=0.5, rely=0.67, anchor=CENTER)
         
         return_bttn = CTkButton(
             master=self.root,
@@ -125,3 +125,22 @@ class RegisterGlucoseScreen:
         self.time.delete(0, END)
         self.time.insert(0, time_picker.time())
         time_window.destroy()
+
+    def register_bttn_action(self):
+        result = Controller.register_glucose(self)
+        if result == "Índice glicêmico cadastrado com sucesso!":
+            sucess = CTkLabel(
+                master=self.root,
+                text=result,
+                text_color="green",
+                font=("Segeo UI", 16, "bold")
+            )
+            sucess.place(relx=0.5, rely=0.75, anchor=CENTER)
+        else: 
+            error = CTkLabel(
+                master=self.root,
+                text=f"Erro ao cadastrar índice glicêmico: \n{result}",
+                text_color="red",
+                font=("Segeo UI", 16, "bold")
+            )
+            error.place(relx=0.5, rely=0.75, anchor=CENTER)

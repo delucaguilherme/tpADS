@@ -5,7 +5,7 @@ class MealPersistance:
     @classmethod
     def insert_meal(self, m:Meal):
         return True
-    
+        
     @classmethod
     def delete_meal(self, m:Meal):
         return True
