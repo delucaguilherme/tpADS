@@ -12,8 +12,6 @@ class HomeScreen:
     def __init__(self, root=None):
         self.root = customtkinter.CTk()
 
-        
-
         icon_glicmed = PhotoImage(file=os.path.join(
             os.path.dirname(__file__), '../icons/GlicMed_icon.png'))
         text_glicmed = PhotoImage(file=os.path.join(
