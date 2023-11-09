@@ -36,9 +36,8 @@ class GlucosePersistance:
     def selectAll(self, email):
         banco = Banco()
         try:
-            i = 0
             c = banco.conexao.cursor()
-            c.execute("SELECT * FROM indice_glicemico WHERE usuario = ?", + (email,))
+            c.execute("SELECT * FROM indice_glicemico WHERE usuario = '" + email + "'")
 
             cadastrados = c.fetchall()
             if cadastrados:

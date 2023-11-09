@@ -15,13 +15,13 @@ class ListGlucoseScreen:
         set_appearance_mode("light")
 
         # Obtém dados do usuário
-        result = GlucosePersistance.selectAll(self, email)
+        result = GlucosePersistance.selectAll(email)
 
         self.frame_direita = CTkFrame(master=self.root, width=780, height=580)  # LightBlue
-        self.frame_direita.grid(row=0, column=1, sticky="nswe", padx=150, pady=150)
+        self.frame_direita.grid(row=0, column=1, sticky="nswe")
 
         # Define colunas para a tabela
-        colunas = ('sugar_level', 'date', 'time', 'meal_type', 'meal_time', 'usuário', '')
+        colunas = ('id', 'sugar_level', 'date', 'time', 'meal_type', 'meal_time', 'usuario', '')
 
         # Cria um widget Treeview para exibir dados
         self.tabela = ttk.Treeview(self.frame_direita, columns=colunas, height=17, selectmode='browse', show='headings')
@@ -34,7 +34,9 @@ class ListGlucoseScreen:
         self.tabela.column("#5", anchor="c", minwidth=50, width=100)
         self.tabela.column("#6", anchor="c", minwidth=50, width=100)
         self.tabela.column("#7", anchor="c", minwidth=50, width=100)
+        self.tabela.column("#8", anchor="c", minwidth=50, width=100)
 
+        self.tabela.heading('id', text='ID')
         self.tabela.heading('sugar_level', text='Índice Glicêmico')
         self.tabela.heading('date', text='Data')
         self.tabela.heading('time', text='Horário')
@@ -52,7 +54,8 @@ class ListGlucoseScreen:
 
         # Adiciona dados à tabela
         for glucose in result:
-            self.tabela.insert('', tk.END, values=glucose + ('EXCLUIR',), tags='button')
+            self.tabela.insert('', tk.END, values=glucose +
+                               ('EXCLUIR',), tags='button')
 
         self.tabela.tag_configure('button')
         self.tabela.bind('<ButtonRelease-1>', lambda event: self.confirm_delete())

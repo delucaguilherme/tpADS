@@ -20,7 +20,7 @@ class UserPersistance:
         banco = Banco()
         try:
             c = banco.conexao.cursor()
-            c.execute("DELETE FROM usuarios WHERE email = ?", (email,))
+            c.execute("DELETE FROM usuarios WHERE email = ", (email,))
             banco.conexao.commit()
             # Verifique se algum registro foi afetado
             if c.rowcount > 0:
@@ -70,7 +70,6 @@ class UserPersistance:
     def selectAll(self):
         banco = Banco()
         try:
-            i = 0
             c = banco.conexao.cursor()
             c.execute("SELECT * FROM usuarios")
 

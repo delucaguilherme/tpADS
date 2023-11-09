@@ -33,12 +33,11 @@ class MealPersistance:
             return "Ocorreu um erro na exclusão do registro de refeição: " + str(e)
     
     @classmethod
-    def selectAll(self):
+    def selectAll(self, email):
         banco = Banco()
         try:
-            i = 0
             c = banco.conexao.cursor()
-            c.execute("SELECT * FROM refeicao")
+            c.execute("SELECT * FROM refeicao WHERE usuario = '" + email + "'")
 
             cadastrados = c.fetchall()
             if cadastrados:

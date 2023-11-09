@@ -33,12 +33,12 @@ class InsulinPersistance:
             return "Ocorreu um erro na exclusão do registro de aplicação de insulina: " + str(e)
         
     @classmethod
-    def selectAll(self):
+    def selectAll(self, email):
         banco = Banco()
         try:
             i = 0
             c = banco.conexao.cursor()
-            c.execute("SELECT * FROM insulina")
+            c.execute("SELECT * FROM insulina WHERE usuario = '" + email + "'")
 
             cadastrados = c.fetchall()
             if cadastrados:
