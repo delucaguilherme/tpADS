@@ -23,6 +23,26 @@ class Banco:
                     usuario text,
                     foreign key(usuario) references usuarios(email))""")
         
+        c.execute("""create table if not exists insulina (
+                    id integer primary key,
+                    quantity integer,
+                    type text,
+                    date text,
+                    time text,
+                    meal_type text,
+                    meal_time text,
+                    usuario text,
+                    foreign key(usuario) references usuarios(email))""")
+        
+        c.execute("""create table if not exists refeicao (
+                    id integer primary key,
+                    carbohydrates integer,
+                    date text,
+                    time text,
+                    meal_type text,
+                    usuario text,
+                    foreign key(usuario) references usuarios(email))""")
+        
         self.conexao.commit()
         c.close()
 

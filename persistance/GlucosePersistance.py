@@ -15,50 +15,36 @@ class GlucosePersistance:
         except Exception as e:
             return "Ocorreu um erro no registro de índice glicêmico: " + str(e)
         
-    # @classmethod
-    # def deleteUser(self, u:User):
-    #     banco = Banco()
-    #     try:
-    #         c = banco.conexao.cursor()
-    #         c.execute("delete from usuarios where email = " + str(u.email))
-    #         banco.conexao.commit()
-    #         c.close()
-    #         return "Usuário excluído com sucesso!"
-    #     except Exception as e:
-    #         return "Ocorreu um erro na exclusão do usuário: " + str(e)
+    @classmethod
+    def deleteGlucose(self, id):
+        banco = Banco()
+        try:
+            c = banco.conexao.cursor()
+            c.execute("DELETE FROM indice_glicemico WHERE id = ?", + (id,))
+            banco.conexao.commit()
+            # Verifique se algum registro foi afetado
+            if c.rowcount > 0:
+                c.close()
+                return "Registro de índice glicêmico excluído com sucesso!"
+            else:
+                c.close()
+                return "Registro não encontrado."
+        except Exception as e:
+            return "Ocorreu um erro na exclusão do registro de índice glicêmico: " + str(e)
+    
+    @classmethod
+    def selectAll(self, email):
+        banco = Banco()
+        try:
+            i = 0
+            c = banco.conexao.cursor()
+            c.execute("SELECT * FROM indice_glicemico WHERE usuario = ?", + (email,))
 
-    # @classmethod
-    # def selectUser(self, email, password):
-    #     banco = Banco()
-    #     try:
-    #         c = banco.conexao.cursor()
-    #         c.execute("SELECT * FROM usuarios WHERE email = ? and senha = ?", (email,password))
-    #         result = c.fetchone()
-    #         if result:
-    #             self.email = result[0]
-    #             self.senha = result[1]
-    #             self.tipo = result[2]
-    #             c.close()
-    #             return self.tipo
-    #         else:
-    #             c.close()
-    #             return "Usuário ou senha incorretos."
-    #     except Exception as e:
-    #         return "Ocorreu um erro na busca do usuário: " + str(e)
-        
-    # @classmethod
-    # def test(self, u:User):
-    #     banco = Banco()
-    #     try:
-    #         c = banco.conexao.cursor()
-    #         c.execute('select * from usuarios where email = ? and senha= ?', (u.email, u.senha))
-    #         result = c.fetchone()
-    #         #print("aqui: " + str(result))
-    #         c.close()
-    #         if result != None:
-    #             return result[2]
-    #         else:
-    #             return 2
-    #     except Exception as e:
-    #         return "erro na busca do usuário: " + str(e)
-        
+            cadastrados = c.fetchall()
+            if cadastrados:
+                print("Consulta executada com sucesso!")
+            else:
+                print("Nenhum registro de índice glicêmico cadastrado.")
+            return cadastrados
+        except Exception as e:
+            return "Ocorreu um erro: " + str(e)

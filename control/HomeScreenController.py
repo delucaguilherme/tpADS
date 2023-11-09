@@ -20,7 +20,7 @@ class HomeScreenController:
         if result == 0:
             UserScreen(email)
         elif result == 1:
-            AdminScreen()
+            AdminScreen(email)
         else:
             self.wrong_credentials(screen)
 

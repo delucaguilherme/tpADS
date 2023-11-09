@@ -9,3 +9,5 @@ class AdminScreenController:
     @classmethod
     def open_delete_screen(self):
         DeleteScreen()
+
+    

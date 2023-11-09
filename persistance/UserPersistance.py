@@ -16,14 +16,19 @@ class UserPersistance:
             return "Ocorreu um erro na inserção do usuário: " + str(e)
         
     @classmethod
-    def deleteUser(self, u:User):
+    def deleteUser(self, email):
         banco = Banco()
         try:
             c = banco.conexao.cursor()
-            c.execute("delete from usuarios where email = " + str(u.email))
+            c.execute("DELETE FROM usuarios WHERE email = ?", (email,))
             banco.conexao.commit()
-            c.close()
-            return "Usuário excluído com sucesso!"
+            # Verifique se algum registro foi afetado
+            if c.rowcount > 0:
+                c.close()
+                return "Usuário excluído com sucesso!"
+            else:
+                c.close()
+                return "Usuário não encontrado."
         except Exception as e:
             return "Ocorreu um erro na exclusão do usuário: " + str(e)
 
@@ -61,3 +66,19 @@ class UserPersistance:
                 return 2
         except Exception as e:
             return "erro na busca do usuário: " + str(e)
+        
+    def selectAll(self):
+        banco = Banco()
+        try:
+            i = 0
+            c = banco.conexao.cursor()
+            c.execute("SELECT * FROM usuarios")
+
+            clientes_cadastrados = c.fetchall()
+            if clientes_cadastrados:
+                print("Consulta executada com sucesso!")
+            else:
+                print("Nenhum usuário cadastrado.")
+            return clientes_cadastrados
+        except Exception as e:
+            return "Ocorreu um erro: " + str(e)
